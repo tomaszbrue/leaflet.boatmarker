@@ -18,14 +18,14 @@ L.BoatIcon = L.Icon.extend({
 		wind: false,
 		windDirection: 0,
 		windSpeed: 0,
-		idleCircle: false
+		idleCircle: false,
+		scale: 20
 	},
 
 	// PROPERTIES
 	x: 66,
 	y: 85,
-	x_fac: 0.18,
-	y_fac: 0.18,
+
 	ctx: null,
 	lastHeading: 0,
 	lastWindDirection: 0,
@@ -54,8 +54,8 @@ L.BoatIcon = L.Icon.extend({
 		var x = this.x;
 		var y = this.y;
 
-		var x_fac = this.x_fac;
-		var y_fac = this.y_fac;
+		var x_fac = this.options.scale / 240;
+		var y_fac = this.options.scale / 240;
 
 		ctx.clearRect(0, 0, w, h);
 
@@ -173,7 +173,12 @@ L.boatMarker = function(pos, options) {
 
 	var c = ("color" in options) ? options.color : "#f1c40f";
 	var i = ("idleCircle" in options) ? options.idleCircle : false;
-	options.icon = new L.BoatIcon({ color: c, idleCircle: i});
+	var scale = ("scale" in options) ? options.scale : 20;
+
+    if(scale>100) scale = 100;
+	if(scale<1) scale = 1;
+
+	options.icon = new L.BoatIcon({ color: c, idleCircle: i, scale: scale});
 
     return new L.BoatMarker(pos, options);
 };

@@ -28,6 +28,7 @@ npm i leaflet.boatmarker --save
 ```javascript
 var boatMarker = L.boatMarker(map.getCenter(), {
   	color: "#f1c40f", 	// color of the boat
+    scale: 25,          // how large you want the boat marker be (from 1 to 100)
 	idleCircle: false	// if set to true, the icon will draw a circle if
 						// boatspeed == 0 and the ship-shape if speed > 0
 });
